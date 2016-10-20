@@ -1,8 +1,14 @@
 
 import _ from 'lodash';
 
-const checkMulti = require('@djforth/morse-jasmine-wp/check_multiple_calls')
-  , spyManager = require('@djforth/morse-jasmine-wp/spy_manager')();
+import {
+  check_multiple_calls as checkMulti
+} from '@djforth/jasmine-call-helpers';
+
+import {
+  spies as SpyManager
+} from '@djforth/stubs-spy-manager';
+const spyManager = SpyManager();
 
 export const testStateToProps = (mod, title='')=>{
   return (state, expectedData, calls, props)=>{

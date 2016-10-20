@@ -3,7 +3,55 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "babel": {
+    "presets": [
+      "es2015",
+      "es2016",
+      "es2017"
+    ],
+    "env": {
+      "karma": {
+        "plugins": [
+          "add-module-exports",
+          [
+            "istanbul",
+            {
+              "exclude": [
+                "**/*_spec.js"
+              ]
+            }
+          ],
+          "rewire"
+        ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "extends": "morsedigital",
+    "globals": {
+      "fdescribe": false,
+      "describe": false,
+      "beforeEach": false,
+      "afterEach": false,
+      "it": false,
+      "expect": false,
+      "spyOn": false,
+      "I18n": false,
+      "jasmine": false
+    },
+    "rules": {
+      "require-jsdoc": 0
+    }
+  },
+  "peerDependencies": {
+    "jasmine-core": "^2.5.2",
+    "lodash": "^4.16.4"
+  },
   "scripts": {
+    "build": "babel src -x '.js' -d lib",
+    "build:watch": "babel src -x '.js' -w --source-maps  -d lib",
+    "lint": "eslint src/**",
+    "lint:tests": "eslint spec/**",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,17 +59,24 @@
     "url": "git+https://github.com/djforth/redux-jasmine-helper.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "A Stainforth",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/djforth/redux-jasmine-helper/issues"
   },
   "homepage": "https://github.com/djforth/redux-jasmine-helper#readme",
+  "peerDependencies": {
+    "@djforth/jasmine-call-helpers": "^1.*.*",
+    "@djforth/stubs-spy-manager": "^1.*.*",
+    "jasmine-core": "^2.*.*",
+    "lodash": "^4.*.*"
+  },
   "devDependencies": {
     "@djforth/ap_karma_wp": "^1.0.2",
     "@djforth/ap_utils": "^3.0.1",
+    "@djforth/jasmine-call-helpers": "^1.0.0",
     "@djforth/morse-jasmine-wp": "^2.4.2",
-    "@djforth/stubs-spy-manager": "^1.0.0",
+    "@djforth/stubs-spy-manager": "1.1.0",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",

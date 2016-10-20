@@ -2,10 +2,18 @@
 
 import _ from 'lodash';
 
-const checkMulti = require('@djforth/morse-jasmine-wp/check_multiple_calls')
-  , spyManager = require('@djforth/morse-jasmine-wp/spy_manager')();
+import {
+  check_multiple_calls as checkMulti
+  , make_calls as MakeCalls
+  , not_called as CreateNotCalled
+} from '@djforth/jasmine-call-helpers';
 
-import StubsSpyHelper, {MakeCalls, CreateNotCalled} from './stubs_spy_helper';
+import {
+  spies as SpyManager
+  , helper as StubsSpyHelper
+} from '@djforth/stubs-spy-manager';
+
+const spyManager = SpyManager();
 
 // Helpers
 const createStubsAndSpies = (items, stubs)=>{
@@ -351,54 +359,48 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
           , {snippets: {editorState: 'some-editor-state'}});
 
         let stsp = [
-          {stub: {
-            title: 'CreateAction'
+          {
+            stub: 'CreateAction'
             , spy: 'creator'
-          }}
-          , {spy: {
-            title: 'creator'
+          }
+          , {
+            spy:'creator'
             , callback: 'creating'
-          }}
-          , {
-            stub: {
-              title: processFn
-              , callback: processFn
-            }
           }
           , {
-            stub: {
-              title: 'InsertPosition'
-              , callback: insert
-            }
+            stub: processFn
+            , callback: processFn
           }
-          , {stub: {
-            title: 'Save'
+          , {
+            stub: 'InsertPosition'
+            , callback: insert
+          }
+          , {
+            stub: 'Save'
             , callback: promise
-          }}
-          , {stub: {
-            title: urlFn.spy
+          }
+          , {
+            stub: urlFn.spy
             , callback: 'some/api/call'
-          }}
-          , {stub: {
-            title: readyData.spy
+          }
+          , {
+            stub: readyData.spy
             , callback: (st, d)=>d
-          }}
-          , {spy: {
-            title: 'dispatch'
+          }
+          , {
+            spy: 'dispatch'
             , callback: (rv)=>rv
-          }}
-          , {spy: {
-            title: 'getState'
+          }
+          , {spy: 'getState'
             , callback: ()=>state
-          }}
+          }
         ];
 
         if (CreateBlock){
           stsp = stsp.concat([
-            {stub: {
-              title: 'CreateBlock'
+            {stub: 'CreateBlock'
               , callback: CreateBlock
-            }}
+            }
           ]);
         }
 
@@ -464,47 +466,6 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
       let testStub = TestMethods(stubs, ()=>[promise, resolve]);
       testSpy(create_spies);
       testStub(create_stubs);
-
-      // it(`Create once saved ${title}`, function(done){
-      //   promise.then(()=>{
-      //     console.log('Saver');
-      //     testSpy(create_spies);
-      //     testStub(create_stubs);
-      //   });
-
-      //   resolve('success');
-
-      //   setTimeout(function(){
-      //     done();
-      //   }, 100);
-      // });
-
-      // let calls = {
-      //   getState: ()=>spyManager.get('getState')
-      //   , dispatch: [()=>{
-      //     return spyManager.get('dispatch');
-      //   }, ()=>['creating']
-      //   ]
-      //   , CreateAction: [()=>stubs.get('CreateAction')
-      //     , ()=>actions.concat([stubs.get(processFn)])
-      //   ]
-      //   , creator: [()=>{
-      //     return spyManager.get('creator');
-      //   }, ()=>['some/api/call', 'some data']
-      //   ]
-      // };
-
-      // calls[urlFn.spy] = [()=>{
-      //   return stubs.get(urlFn.spy);
-      // }, ()=>urlFn.attrs
-      // ];
-
-      // calls[readyData.spy] = [()=>{
-      //   return stubs.get(readyData.spy);
-      // }, ()=>readyData.attrs
-      // ];
-
-      // checkMulti(calls);
     });
   };
 };

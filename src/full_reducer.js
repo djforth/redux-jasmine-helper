@@ -1,6 +1,11 @@
-import checkMulti from '@djforth/morse-jasmine-wp/check_multiple_calls';
+import {
+  check_multiple_calls as checkMulti
+} from '@djforth/jasmine-call-helpers';
 
-import StubsSpyHelper from '../utils/stubs_spy_helper';
+import {
+  helper as StubsSpyHelper
+} from '@djforth/stubs-spy-manager';
+
 
 let stub_helper = (type)=>(state, action)=>{
   if (action.type === type) return type;
@@ -32,57 +37,47 @@ export default (title, stubs, spyManager)=>(reducer, default_state)=>{
     beforeEach(function(){
       stubs_spies([
         {
-          stub: {
-            title: 'updateState'
-            , spy: {
-              title: 'update_state'
-              , callback: 'new-state'
-            }
+          stub: 'updateState'
+          , spy: {
+            title: 'update_state'
+            , callback: 'new-state'
+          }
+
+        }
+        , {
+          stub: 'setDefaults'
+          , returnType: 'callFake'
+          , callback: (state)=>{
+            return Object.assign({}, default_state, state);
           }
         }
         , {
-          stub: {
-            title: 'setDefaults'
-            , returnType: 'callFake'
-            , callback: (state)=>{
-              return Object.assign({}, default_state, state);
-            }
-          }
+          stub:
+          'fetcher'
+          , returnType: 'callFake'
+          , callback: stub_helper('FETCH')
         }
         , {
-          stub: {
-            title: 'fetcher'
-            , returnType: 'callFake'
-            , callback: stub_helper('FETCH')
-          }
+          stub: 'creator'
+          , returnType: 'callFake'
+          , callback: stub_helper('CREATE')
+
         }
         , {
-          stub: {
-            title: 'creator'
-            , returnType: 'callFake'
-            , callback: stub_helper('CREATE')
-          }
+          stub: 'destroyer'
+          , returnType: 'callFake'
+          , callback: stub_helper('DESTROY')
+
         }
         , {
-          stub: {
-            title: 'destroyer'
-            , returnType: 'callFake'
-            , callback: stub_helper('DESTROY')
-          }
+          stub:  'updater'
+          , returnType: 'callFake'
+          , callback: stub_helper('UPDATE')
         }
         , {
-          stub: {
-            title: 'updater'
-            , returnType: 'callFake'
-            , callback: stub_helper('UPDATE')
-          }
-        }
-        , {
-          stub: {
-            title: 'modal'
-            , returnType: 'callFake'
-            , callback: stub_helper('MODAL')
-          }
+          stub: 'modal'
+          , returnType: 'callFake'
+          , callback: stub_helper('MODAL')
         }
       ]);
     });
