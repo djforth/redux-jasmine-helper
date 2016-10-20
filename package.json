@@ -1,6 +1,6 @@
 {
   "name": "@djforth/redux-jasmine-helper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "babel": {
@@ -44,8 +44,10 @@
     }
   },
   "peerDependencies": {
-    "jasmine-core": "^2.5.2",
-    "lodash": "^4.16.4"
+    "@djforth/jasmine-call-helpers": "^1.*.*",
+    "@djforth/stubs-spy-manager": "^1.*.*",
+    "jasmine-core": "^2.*.*",
+    "lodash": "^4.*.*"
   },
   "scripts": {
     "build": "babel src -x '.js' -d lib",
@@ -65,12 +67,6 @@
     "url": "https://github.com/djforth/redux-jasmine-helper/issues"
   },
   "homepage": "https://github.com/djforth/redux-jasmine-helper#readme",
-  "peerDependencies": {
-    "@djforth/jasmine-call-helpers": "^1.*.*",
-    "@djforth/stubs-spy-manager": "^1.*.*",
-    "jasmine-core": "^2.*.*",
-    "lodash": "^4.*.*"
-  },
   "devDependencies": {
     "@djforth/ap_karma_wp": "^1.0.2",
     "@djforth/ap_utils": "^3.0.1",
