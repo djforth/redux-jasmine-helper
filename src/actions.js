@@ -96,7 +96,7 @@ const createDispatchCall = (data)=>{
   let obj = {};
   let call = [
     ()=>{
-      return spyManager.get('dispatch')
+      return spyManager.get('dispatch');
     }
     , constructArguments(data.attrs)
     // , data.dispatch

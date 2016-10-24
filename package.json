@@ -45,7 +45,7 @@
   },
   "peerDependencies": {
     "@djforth/jasmine-call-helpers": "^1.*.*",
-    "@djforth/stubs-spy-manager": "^1.*.*",
+    "@djforth/stubs-spy-manager": "^1.1.3-4",
     "jasmine-core": "^2.*.*",
     "lodash": "^4.*.*"
   },
