@@ -6,7 +6,6 @@ import {
   helper as StubsSpyHelper
 } from '@djforth/stubs-spy-manager';
 
-
 let stub_helper = (type)=>(state, action)=>{
   if (action.type === type) return type;
   return false;

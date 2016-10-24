@@ -211,7 +211,7 @@ export const MultiDispatchAction = (title, mainAction, stubs, sp)=>{
 
       let calls = Object.assign(
         {
-          getState: ()=> spyManager.get('getState')
+          getState: ()=>spyManager.get('getState')
         }
         , constructCalls(actions, stubs, spyManager)
       );
@@ -410,7 +410,7 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
         creator(spyManager.get('dispatch'), spyManager.get('getState'));
       });
 
-      it('should return function', function() {
+      it('should return function', function(){
         expect(_.isFunction(creator)).toBeTruthy();
       });
 
