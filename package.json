@@ -45,7 +45,7 @@
   },
   "peerDependencies": {
     "@djforth/jasmine-call-helpers": "^1.*.*",
-    "@djforth/stubs-spy-manager": "^1.1.3-4",
+    "@djforth/stubs-spy-manager": "^2.*.*",
     "jasmine-core": "^2.*.*",
     "lodash": "^4.*.*"
   },
@@ -72,7 +72,7 @@
     "@djforth/ap_utils": "^3.0.1",
     "@djforth/jasmine-call-helpers": "^1.0.0",
     "@djforth/morse-jasmine-wp": "^2.4.2",
-    "@djforth/stubs-spy-manager": "1.1.0",
+    "@djforth/stubs-spy-manager": "2.0.1",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",
