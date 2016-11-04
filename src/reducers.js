@@ -1,4 +1,4 @@
-/*eslint-env jasmine, browser */
+/* eslint-env jasmine, browser */
 import _ from 'lodash';
 
 import {
@@ -15,10 +15,10 @@ function SetStubs(stubs, reducer, returnValue){
   return stubs.get(reducer);
 }
 
-function SetSpy(sm, spy){
-  sm.add(spy);
-  sm.addReturn(spy)('returnValue', spy);
-}
+// function SetSpy(sm, spy){
+//   sm.add(spy);
+//   sm.addReturn(spy)('returnValue', spy);
+// }
 
 function checkReducer(data, rtn){
   describe('Reducer check', function(){
@@ -53,9 +53,8 @@ function checkArgs(data, exp, call = 0){
       spy = data();
     });
 
-    it('should have the correct number of argument', function() {
+    it('should have the correct number of argument', function(){
       let count = spy.calls.argsFor(call).length;
-      // console.log(count, exp.length)
       expect(count).toEqual(exp.length);
     });
 
@@ -150,7 +149,7 @@ export const rootReducerWithReturn = (stubs, mainReducer)=>{
       checkReducer(()=>[fn, `${reducer}_spy`], `${reducer}_spy`);
       checkArgs(()=>fn, exp);
 
-      describe('return function', function() {
+      describe('return function', function(){
         checkReducer(()=>[spyManager.get(`${reducer}_spy`), newState], `${reducer}_spy`);
         checkArgs(()=>spyManager.get(`${reducer}_spy`), spy_args);
       });

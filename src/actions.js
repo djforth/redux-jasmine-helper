@@ -406,10 +406,9 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
 
         if (StopEditing){
           stsp = stsp.concat([
-            {stub: {
-              title: StopEditing
-              , callback: 'stop-editing'
-            }}
+            {stub:  StopEditing
+            , callback: 'stop-editing'
+            }
           ]);
         }
 

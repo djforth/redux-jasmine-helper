@@ -37,45 +37,38 @@ export default (title, stubs, spyManager)=>(reducer, default_state)=>{
       stubs_spies([
         {
           stub: 'updateState'
-          , spy: {
-            title: 'update_state'
-            , callback: 'new-state'
-          }
-
+          , spy:  'update_state'
+        }
+        , {
+          spy:  'update_state'
+          , callback: 'new-state'
         }
         , {
           stub: 'setDefaults'
-          , returnType: 'callFake'
           , callback: (state)=>{
             return Object.assign({}, default_state, state);
           }
         }
         , {
-          stub:
-          'fetcher'
-          , returnType: 'callFake'
+          stub: 'fetcher'
           , callback: stub_helper('FETCH')
         }
         , {
           stub: 'creator'
-          , returnType: 'callFake'
           , callback: stub_helper('CREATE')
 
         }
         , {
           stub: 'destroyer'
-          , returnType: 'callFake'
           , callback: stub_helper('DESTROY')
 
         }
         , {
           stub:  'updater'
-          , returnType: 'callFake'
           , callback: stub_helper('UPDATE')
         }
         , {
           stub: 'modal'
-          , returnType: 'callFake'
           , callback: stub_helper('MODAL')
         }
       ]);

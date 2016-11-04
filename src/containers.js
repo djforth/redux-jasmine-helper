@@ -91,59 +91,43 @@ export const testDispatchToProps = (title, getMod,  stubs)=>{
 export const FormStubs = (item)=>{
   return [
     {
-      stub: {
-        title: 'DataHelper'
-        , callback: item
-      }
+      stub: 'DataHelper'
+      , callback: item
+    }
+
+    , {
+      stub: 'Selected'
+      , callback: (c, type)=>type
     }
     , {
-      stub: {
-        title: 'Selected'
-        , callback: (c, type)=>type
-        , returnType: 'callFake'
-      }
+      stub: 'SelectedValue'
+      , callback: false
+    }
+
+    , {
+      stub:'CreateOpts'
+      , callback: (opts)=>opts
     }
     , {
-      stub: {
-        title: 'SelectedValue'
-        , callback: false
-      }
+      stub:  'CreateCheckbox'
+      , callback: (id)=>id
     }
     , {
-      stub: {
-        title: 'CreateOpts'
-        , callback: (opts)=>opts
-        , returnType: 'callFake'
-      }
+      stub: 'CreateTitle'
+      , callback: 'Title'
+
     }
     , {
-      stub: {
-        title: 'CreateCheckbox'
-        , callback: (id)=>id
-        , returnType: 'callFake'
-      }
+      stub: 'GetAssociatedItem'
+      , spy: 'selected_item'
     }
     , {
-      stub: {
-        title: 'CreateTitle'
-        , callback: 'Title'
-      }
+      spy: 'selected_item'
+      , callback: (items, name)=>name
     }
     , {
-      stub: {
-        title: 'GetAssociatedItem'
-        , spy: {
-          title: 'selected_item'
-          , callback: (items, name)=>name
-          , returnType: 'callFake'
-        }
-      }
-    }
-    , {
-      stub: {
-        title: 'InsertPosition'
-        , callback: {draft_key: 'aaa', position: 222}
-      }
+      stub: 'InsertPosition'
+      , callback: {draft_key: 'aaa', position: 222}
     }
   ];
 };
