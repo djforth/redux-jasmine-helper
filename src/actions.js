@@ -327,7 +327,7 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
   return (fns, CreateBlock, actions, state = {foo: 'bar'})=>{
     describe(`Create ${title}`, function(){
       let [
-        processFn, readyData, urlFn
+        processFn, readyData, urlFn, StopEditing
       ] = fns;
 
       readyData = CheckSpy(readyData);
@@ -404,6 +404,15 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
           ]);
         }
 
+        if (stopEditing){
+          stsp = stsp.concat([
+            {stub: {
+              title: StopEditing
+              , callback: 'stop-editing'
+            }}
+          ]);
+        }
+
         stubs_spies(stsp);
 
         creator = CreateMethod({data: 'some data'});
@@ -420,7 +429,17 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
         ['CreateAction', ()=>actions.concat([stubs.get(processFn)])]
       ];
 
-      let create_block_stubs, create_block_spies;
+      let create_block_stubs, create_block_spies, stop_editing_stubs, stop_editing_spies;
+
+      if (stopEditing){
+        stop_editing_stubs = [
+          [stopEditing, ()=>[]]
+        ];
+
+        stop_editing_spies = [
+          ['dispatch', ()=>['stop-editing'], dispatch_call()]
+        ];
+      }
 
       if (CreateBlock){
         create_block_stubs = [
@@ -431,6 +450,8 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
           ['dispatch', ()=>[CreateBlock], dispatch_call()]
         ];
       }
+
+
 
       let save_stubs = [
         ['Save', ()=>[]]
@@ -453,6 +474,12 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
       ];
 
       let calls = makeStubCalls(create_action_stubs);
+
+      if (StopEditing){
+        calls = makeStubCalls(stop_editing_stubs, calls);
+        calls = makeSpyCalls(stop_editing_spies, calls);
+      }
+
       if (CreateBlock){
         calls = makeStubCalls(create_block_stubs, calls);
         calls = makeSpyCalls(create_block_spies, calls);
