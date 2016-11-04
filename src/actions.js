@@ -404,7 +404,7 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
           ]);
         }
 
-        if (stopEditing){
+        if (StopEditing){
           stsp = stsp.concat([
             {stub: {
               title: StopEditing
@@ -431,9 +431,9 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
 
       let create_block_stubs, create_block_spies, stop_editing_stubs, stop_editing_spies;
 
-      if (stopEditing){
+      if (StopEditing){
         stop_editing_stubs = [
-          [stopEditing, ()=>[]]
+          [StopEditing, ()=>[]]
         ];
 
         stop_editing_spies = [
