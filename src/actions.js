@@ -333,7 +333,7 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
       readyData = CheckSpy(readyData);
       urlFn = CheckSpy(urlFn);
 
-      let creator, insert, promise, reject, resolve;
+      let creator, insert;
 
       let stubs_spies = StubsSpyHelper(stubs, spyManager);
       let makeSpyCalls = MakeCalls(spyManager);
@@ -345,11 +345,6 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
       });
 
       beforeEach(function(){
-        promise = new Promise((res, rej)=>{
-          resolve = res;
-          reject  = rej;
-        });
-
         insert = {
           snippet_draft_key: 'aaa'
           , entity_mappable_offset: 1
@@ -375,10 +370,10 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
             stub: 'InsertPosition'
             , callback: insert
           }
-          , {
-            stub: 'Save'
-            , callback: promise
-          }
+          // , {
+          //   stub: 'Save'
+          //   , callback: promise
+          // }
           , {
             stub: urlFn.spy
             , callback: 'some/api/call'
@@ -450,15 +445,13 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
         ];
       }
 
+      // let save_stubs = [
+      //   ['Save', ()=>[]]
+      // ];
 
-
-      let save_stubs = [
-        ['Save', ()=>[]]
-      ];
-
-      let save_spies = [
-        ['dispatch', ()=>[promise], dispatch_call()]
-      ];
+      // let save_spies = [
+      //   ['dispatch', ()=>[promise], dispatch_call()]
+      // ];
 
       let create_spies = [
         ['getState', ()=>[]]
@@ -484,14 +477,14 @@ export const createDataActions = (title, stubs, CreateMethod)=>{
         calls = makeSpyCalls(create_block_spies, calls);
       }
 
-      calls = makeStubCalls(save_stubs, calls);
-      calls = makeSpyCalls(save_spies, calls);
+      calls = makeStubCalls(create_stubs, calls);
+      calls = makeSpyCalls(create_spies, calls);
       checkMulti(calls);
 
-      let testSpy = TestMethods(spyManager, ()=>[promise, resolve]);
-      let testStub = TestMethods(stubs, ()=>[promise, resolve]);
-      testSpy(create_spies);
-      testStub(create_stubs);
+      // let testSpy = TestMethods(spyManager, ()=>[promise, resolve]);
+      // let testStub = TestMethods(stubs, ()=>[promise, resolve]);
+      // testSpy(create_spies);
+      // testStub(create_stubs);
     });
   };
 };
